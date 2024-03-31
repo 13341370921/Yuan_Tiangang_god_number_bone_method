@@ -25,7 +25,7 @@ def CallTheBoneGodNumber(year_dict: dict, month_dict: dict, day_dict: dict, when
         print("格式错误！")
 
 
-def mina():
+def CreateNnInformationDictionary():
     # 创建年号,年龄,属性
     TIMES = time.ctime(time.time())
     CELESTIAL_STEM = "甲乙丙丁戊己庚辛壬癸" * 60
@@ -59,13 +59,19 @@ def mina():
         if i % 2 == 1:
             when_age[i] = WHEN[shu_1]
             shu_1 += 1
-    try:
-        info = input('输入年月日时\n\033[1m\033[31m注意格式为2000/5/14/1:00: \033[0m').split('/')
-        info_b = CallTheBoneGodNumber(year_dict, month_dict, day_dict, when_age, info)
-        print(f"\n\033[1m\033[34m{'='*(len(info_b)+len(info_b))}\n|{info_b}|\n{'='*(len(info_b)+len(info_b))}\033[0m")
+    return year_dict, month_dict, day_dict, when_age
 
-    except TypeError as error:
-        print("输入有误！")
+
+def mina():
+    while True:
+        year_dict, month_dict, day_dict, when_age = CreateNnInformationDictionary()
+        try:
+            info = input('\n输入年月日时\n\033[1m\033[31m注意格式为2000/5/14/1:00: \033[0m').split('/')
+            info_b = CallTheBoneGodNumber(year_dict, month_dict, day_dict, when_age, info)
+            print(f"\n\033[1m\033[34m{'='*(len(info_b)+len(info_b))}\n|{info_b}|\n{'='*(len(info_b)+len(info_b))}\033[0m")
+
+        except TypeError:
+            print("输入有误！")
 
 
 if __name__ == "__main__":
